@@ -1,0 +1,867 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>À propos | BAT & PREFAB – Notre histoire, vision et expertise en construction préfabriquée</title>
+    <meta name="description" content="Découvrez BAT & PREFAB, leader ivoirien de la construction préfabriquée depuis 2018. Notre vision, nos objectifs et notre engagement qualité pour des bâtiments modulaires durables.">
+    <meta name="keywords" content="histoire BAT & PREFAB, entreprise construction préfabriquée Côte d'Ivoire, vision construction modulaire, expertise préfabriqué Abidjan">
+    <meta name="author" content="BAT & PREFAB">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://www.bat-prefab.com/a-propos/">
+    <link rel="alternate" hreflang="fr" href="https://www.bat-prefab.com/a-propos/">
+    
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.bat-prefab.com/a-propos/">
+    <meta property="og:title" content="À propos | BAT & PREFAB – Construction préfabriquée en Côte d'Ivoire">
+    <meta property="og:description" content="Découvrez l'entreprise BAT & PREFAB : 20 ans d'innovation (représentés par 2018-2026), nos valeurs, notre bureau d'études et nos réalisations modulaires.">
+    <meta property="og:image" content="https://www.bat-prefab.com/logo-bat-prefab.png">
+    <meta property="og:image:alt" content="Logo BAT & PREFAB entreprise construction préfabriquée">
+    <meta property="og:locale" content="fr_FR">
+    <meta property="og:site_name" content="BAT & PREFAB">
+    
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="À propos | BAT & PREFAB – Notre histoire et vision">
+    <meta name="twitter:description" content="Leader de la construction modulaire en Afrique de l'Ouest. Découvrez nos objectifs et notre engagement qualité.">
+    <meta name="twitter:image" content="https://www.bat-prefab.com/logo-bat-prefab.png">
+    
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "AboutPage",
+      "name": "À propos de BAT & PREFAB",
+      "description": "Entreprise ivoirienne spécialisée dans la construction préfabriquée et modulaire.",
+      "mainEntity": {
+        "@type": "Organization",
+        "name": "BAT & PREFAB",
+        "foundingDate": "2018",
+        "founders": [
+          {
+            "@type": "Person",
+            "name": "Fondateur BAT & PREFAB"
+          }
+        ],
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Abidjan",
+          "addressCountry": "Côte d'Ivoire"
+        },
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "telephone": "+2250556121339",
+          "contactType": "customer service"
+        },
+        "sameAs": [
+          "https://www.facebook.com/bat-prefab.ci",
+          "https://www.linkedin.com/company/bat-prefab"
+        ],
+        "areaServed": ["Côte d'Ivoire", "Togo", "Burkina Faso", "Cameroun"]
+      }
+    }
+    </script>
+    
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&family=Oswald:wght@500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <link rel="stylesheet" href="../style.css">
+    <link rel="icon" type="image/png" href="../favicon.png">
+
+    <style>
+        .bg-royal-blue {
+            background-color: #002344 !important; 
+        }
+        .bg-dark-section {
+            background-color: #0b0b0b !important; 
+        }
+        .bg-royal-blue .luxury-quote, 
+        .bg-dark-section .luxury-quote {
+            color: #ffffff !important;
+        }
+        .bg-royal-blue .luxury-author, 
+        .bg-dark-section .luxury-author {
+            color: #FFC107 !important;
+        }
+        .about-hero {
+            padding: 180px 5% 100px;
+            text-align: center;
+            background: url('../banniere/pre.jpeg') center/cover no-repeat;
+            margin-top: 70px;
+        }
+        .about-hero h1 { 
+            font-family: var(--font-heading); 
+            font-size: clamp(2.5rem, 8vw, 4rem); 
+            color: var(--accent-color) !important; 
+            margin-bottom: 20px; 
+            text-transform: uppercase;
+        }
+        .about-hero p {
+            color: #FFC107 !important;
+            max-width: 800px;
+            margin: 0 auto;
+            font-size: 1.2rem;
+            line-height: 1.6;
+        }
+        .manifesto-grid {
+            background: #ffffff !important;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            padding: 80px 10%;
+        }
+        .manifesto-card {
+            background: #f8f8f8 !important;
+            padding: 40px;
+            border-left: 4px solid var(--accent-color);
+            transition: var(--transition-fast);
+            color: #1a1a1a !important;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+        .manifesto-card h3 { 
+            font-family: var(--font-heading); 
+            margin-bottom: 15px; 
+            color: #1a1a1a !important;
+        }
+        .manifesto-card p {
+            color: #444 !important;
+        }
+        .manifesto-card i { font-size: 2rem; color: var(--accent-color); margin-bottom: 20px; }
+        .vision-objectives {
+            background: #000000 !important;
+            color: #fff !important;
+        }
+        .luxury-quote {
+            color: #fff !important;
+            font-size: 1.8rem;
+            font-style: italic;
+        }
+        .reveal-hero, .reveal-card, .reveal-vision {
+            opacity: 1; 
+        }
+        /* Header */
+        .header-wrapper {
+            background: #ffffff !important;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+        .navbar {
+            display: grid;
+            grid-template-columns: auto 1fr auto;
+            align-items: center;
+            gap: 20px;
+            padding: 0 5%;
+            height: 70px;
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+        .logo { justify-self: start; }
+        .logo-img { height: 50px; width: auto; }
+        .nav-links {
+            justify-self: center;
+            display: flex;
+            gap: 30px;
+            margin: 0;
+            padding: 0;
+        }
+        .nav-links li a {
+            font-family: var(--font-heading);
+            font-size: 14px;
+            text-transform: none;          
+            font-weight: 500;
+            letter-spacing: 1px;
+            position: relative;
+            color: #000 !important;
+        }
+        .nav-links li a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0%;
+            height: 2px;
+            background: var(--accent-color);
+            transition: var(--transition-slow);
+        }
+        .nav-links li a:hover::after { width: 100%; }
+        .btn-contact {
+            padding: 8px 20px;
+            border: 1px solid var(--accent-color);
+            color: var(--accent-color) !important;
+            font-size: 12px;
+            transition: var(--transition-fast);
+            text-transform: none;
+        }
+        .btn-contact:hover {
+            background: var(--accent-color);
+            color: #000 !important;
+        }
+        .header-social-icons {
+            justify-self: end;
+            display: flex;
+            gap: 15px;
+        }
+        .header-social-icons .social-icon {
+            color: #0066CC;
+            font-size: 1.2rem;
+            transition: color 0.3s;
+        }
+        .header-social-icons .social-icon:hover { color: #004499; }
+        .contact-bar { display: none; }
+        .menu-toggle {
+            display: none;
+            font-size: 1.5rem;
+            color: #000;
+            cursor: pointer;
+        }
+        @media (max-width: 900px) {
+            .navbar { display: flex; justify-content: space-between; }
+            .nav-links {
+                position: absolute;
+                top: 70px;
+                left: 0;
+                width: 100%;
+                background: #ffffff;
+                flex-direction: column;
+                padding: 20px;
+                display: none;
+                box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+                z-index: 999;
+            }
+            .nav-links.nav-active { display: flex; }
+            .header-social-icons {
+                display: flex;
+                gap: 10px;
+                margin-right: 10px;
+            }
+            .menu-toggle { display: block; order: 2; }
+            .logo { order: 1; }
+            .header-social-icons { order: 3; }
+        }
+        .hero-section, .about-hero { margin-top: 70px !important; }
+
+        /* Footer newsletter */
+        .footer-newsletter #newsletter-form {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            max-width: 500px;
+            margin: 0 auto;
+            flex-wrap: wrap;
+        }
+        .footer-newsletter #newsletter-form input {
+            flex: 1;
+            min-width: 250px;
+            text-align: center; 
+        }
+        @media (max-width: 600px) {
+            .footer-newsletter #newsletter-form {
+                flex-direction: column;
+                align-items: center;
+            }
+            .footer-newsletter #newsletter-form input {
+                width: 100%;
+                text-align: center;
+            }
+            .footer-newsletter #newsletter-form button {
+                width: auto;
+                min-width: 200px;
+            }
+        }
+        @media (max-width: 900px) {
+            .nav-links {
+                position: fixed;
+                top: 70px;
+                left: 0;
+                right: 0;
+                width: 90%;
+                margin: 10px auto;
+                background: transparent;
+                backdrop-filter: blur(10px);
+                border-radius: 24px;
+                padding: 20px 16px;
+                flex-direction: column;
+                gap: 12px;
+                box-shadow: 0 20px 35px -10px rgba(0,0,0,0.25);
+                border: 1px solid rgba(0,102,204,0.2);
+                z-index: 1000;
+                transform: translateY(-20px);
+                opacity: 0;
+                visibility: hidden;
+                transition: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+            }
+            .nav-links.nav-active {
+                transform: translateY(0);
+                opacity: 1;
+                visibility: visible;
+            }
+            .nav-links li {
+                width: 100%;
+                list-style: none;
+                margin: 0;
+            }
+            .nav-links li a {
+                display: block;
+                text-align: center;
+                padding: 14px 20px;
+                background: #f8f9fc;
+                border-radius: 60px;
+                font-family: 'Montserrat', sans-serif;
+                font-weight: 600;
+                font-size: 1rem;
+                color: #003366 !important;
+                letter-spacing: 0.5px;
+                border: 1px solid #e9ecef;
+                transition: all 0.2s ease;
+                box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+            }
+            .nav-links li a::after { display: none; }
+            .nav-links li a:hover,
+            .nav-links li a:active {
+                background: #0066CC;
+                color: white !important;
+                border-color: #0066CC;
+                transform: scale(1.02);
+                box-shadow: 0 8px 18px rgba(0,102,204,0.3);
+            }
+            .nav-links li:last-child a:hover,
+            .nav-links li:last-child a:active {
+                background: #004499;
+                transform: scale(1.02);
+            }
+            .menu-overlay {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0,0,0,0.5);
+                backdrop-filter: blur(3px);
+                z-index: 999;
+                opacity: 0;
+                visibility: hidden;
+                transition: 0.3s;
+            }
+            .menu-overlay.active {
+                opacity: 1;
+                visibility: visible;
+            }
+            .header-wrapper { z-index: 1001; }
+        }
+        .nav-links li a {
+            color: #000 !important;
+            font-family: 'Oswald', sans-serif;
+            font-size: 14px;
+            font-weight: 500;
+            letter-spacing: 1px;
+            position: relative;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        .nav-links li a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0%;
+            height: 2px;
+            background: #0066CC;
+            transition: width 0.3s ease;
+        }
+        .nav-links li a:hover {
+            color: #0066CC !important;
+        }
+        .nav-links li a:hover::after { width: 100%; }
+        .header-social-icons .social-icon {
+            color: #0066CC;
+            font-size: 1.2rem;
+            transition: color 0.3s ease;
+        }
+        .header-social-icons .social-icon:hover { color: #004499; }
+        .ticker-bar button {
+            background: rgba(0, 0, 0, 0.2);
+            border: none;
+            color: #000;
+            font-weight: bold;
+            padding: 5px 15px;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: background 0.2s ease;
+        }
+        .ticker-bar button:hover { background: rgba(0, 0, 0, 0.4); }
+        .luxury-author {
+            color: #FFC107 !important;  
+            font-weight: bold;
+        }
+
+        .stats-fixed-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+        @media (max-width: 768px) {
+            .stats-fixed-grid {
+                grid-template-columns: 1fr 1fr !important;
+                gap: 20px !important;
+            }
+        }
+        .stat-fixed-number {
+            font-size: 3rem;
+            font-weight: 700;
+            color: #FFD700;
+        }
+        @media (max-width: 768px) {
+            .stat-fixed-number {
+                font-size: 2.2rem !important;
+            }
+        }
+        .stat-fixed-label {
+            color: #e0e0e0;
+            font-weight: 400;
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+        .testimonial-item {
+            background: rgba(255,255,255,0.06);
+            padding: 25px;
+            border-radius: 12px;
+            border-left: 4px solid #FFD700;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+        }
+        .testimonial-item p {
+            font-style: italic;
+            color: #f0f0f0;
+            line-height: 1.7;
+            font-size: 0.95rem;
+        }
+        .testimonial-item cite {
+            display: block;
+            margin-top: 15px;
+            color: #FFD700;
+            font-style: normal;
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+        @media (max-width: 992px) {
+            .testimonials-grid {
+                grid-template-columns: repeat(2, 1fr) !important;
+            }
+        }
+        @media (max-width: 768px) {
+            .testimonials-grid {
+                grid-template-columns: 1fr 1fr !important;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .manifesto-luxury .container > div {
+                grid-template-columns: 1fr !important;
+            }
+        }
+#contact-cta,
+#contact-cta .cta-wrapper,
+#contact-cta .cta-content,
+#contact-cta .cta-image-container,
+#contact-cta .cta-experience-badge {
+    box-shadow: none !important;
+    border: none !important;
+    outline: none !important;
+}
+
+#contact-cta .cta-main-img {
+    border-radius: 30px !important;   
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15); 
+}
+.footer-title {
+    font-size: 1.9rem !important; 
+}
+
+.bg-royal-blue .container > div {
+    display: grid;
+    grid-template-columns: 1.2fr 1.8fr !important;
+    gap: 30px;
+    align-items: center;
+}
+
+.bg-royal-blue .luxury-image-col {
+    display: flex !important;
+    justify-content: flex-end !important;
+    align-items: center;
+    width: 100%;
+    overflow: visible;
+}
+
+.bg-royal-blue .luxury-image-col img {
+    width: 100% !important;
+    max-width: 100% !important;
+    height: auto;
+    border-radius: 16px;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.4);
+    object-fit: cover;
+    aspect-ratio: 16/10;
+    display: block;
+}
+
+@media (max-width: 1200px) {
+    .bg-royal-blue .container > div {
+        grid-template-columns: 1.2fr 1.8fr !important;
+        gap: 30px;
+    }
+}
+
+@media (max-width: 992px) {
+    .bg-royal-blue .container > div {
+        grid-template-columns: 1fr 1.5fr !important;
+        gap: 25px;
+    }
+}
+
+@media (max-width: 768px) {
+    .bg-royal-blue .container > div {
+        grid-template-columns: 1fr !important;
+        gap: 30px;
+    }
+    .bg-royal-blue .luxury-image-col img {
+        width: 100% !important;
+        max-width: 100% !important;
+        aspect-ratio: 16/9;
+    }
+}
+.footer-newsletter {
+    margin-bottom: -10 !important;
+    padding-bottom: 0 !important;
+}
+
+.footer-about-cta {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+}
+/* vision et objectifs */
+.vision-objectives h2 {
+    font-size: 1.2rem !important;
+}
+
+/* L'EXCELLENCE EN CHIFFRES */
+.bg-royal-blue h2 {
+    font-size: 1.2rem !important;
+}
+.bg-dark-section h2 {
+    font-size: 1.2rem !important;
+}
+    </style>
+</head>
+<body class="light-mode">
+    <div class="menu-overlay" id="menu-overlay"></div>
+
+    <div class="header-wrapper">
+        <header class="main-header">
+            <nav class="navbar">
+                <div class="logo">
+                    <a href="../">
+                        <img src="../logo-bat-prefab.png" alt="Logo" class="logo-img">
+                    </a>
+                </div>
+                
+                <div class="menu-toggle">
+                    <i class="fas fa-bars"></i>
+                </div>
+
+                <ul class="nav-links">
+                    <li><a href="../">Accueil</a></li>
+                    <li><a href="../nos-services/">Nos services</a></li>
+                    <li><a href="../nos-realisations/">Réalisations</a></li>
+                    <li><a href="../catalogue/">Catalogue</a></li>
+                    <li><a href="../contact">Contact</a></li>
+                </ul>
+
+                <div class="header-social-icons">
+                    <a href="tel:+2250556121339" class="social-icon"><i class="fas fa-phone-alt"></i></a>
+                    <a href="https://wa.me/2250556121339" class="social-icon"><i class="fab fa-whatsapp"></i></a>
+                    <a href="mailto:contact@bat-prefab.com" class="social-icon"><i class="fas fa-envelope"></i></a>
+                    <a href="https://www.facebook.com/bat-prefab.ci" class="social-icon"><i class="fab fa-facebook"></i></a>
+                    <a href="https://www.linkedin.com/company/bat-prefab" class="social-icon"><i class="fab fa-linkedin"></i></a>
+                </div>
+            </nav>
+        </header>
+        
+        <div class="ticker-bar">
+            <button id="promo-trigger-btn" onclick="openPromo()">
+                <i class="fas fa-fire"></i> OFFRES SPÉCIALES
+            </button>
+            <div class="ticker-wrapper">
+                <div class="ticker-content">
+                    <span>L'ARCHITECTURE INDUSTRIELLE DE DEMAIN — BAT & PREFAB : RIGUEUR, PASSION ET INNOVATION — DISPONIBLE POUR VOS PROJETS — </span>
+                    <span>L'ARCHITECTURE INDUSTRIELLE DE DEMAIN — BAT & PREFAB : RIGUEUR, PASSION ET INNOVATION — DISPONIBLE POUR VOS PROJETS — </span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <section class="about-hero">
+        <h1 class="reveal-hero">L’Ingénierie de Demain.</h1>
+        <p class="reveal-hero" style="max-width: 800px; margin: 0 auto; font-size: 1.2rem; line-height: 1.6;">
+            Bat & Prefab redéfinit l’acte de bâtir en Côte d’Ivoire depuis 2018 avec l'innovation modulaire au cœur de son ADN.
+        </p>
+    </section>
+
+    <section class="manifesto-grid">
+        <div class="manifesto-card reveal">
+            <i class="fas fa-eye"></i>
+            <h3>Notre Vision</h3>
+            <p>Allier l’immédiat au durable. Nous offrons la rapidité du préfabriqué sans jamais sacrifier l'esthétique ni la solidité.</p>
+        </div>
+        <div class="manifesto-card reveal">
+            <i class="fas fa-tools"></i>
+            <h3>Savoir-Faire</h3>
+            <p>De l'intelligence conceptuelle de notre bureau d'études à la maîtrise technique sur le terrain.</p>
+        </div>
+        <div class="manifesto-card reveal">
+            <i class="fas fa-check-double"></i>
+            <h3>Engagement Qualité</h3>
+            <p>Matériaux premium, normes internationales et accompagnement sur-mesure pour chaque client.</p>
+        </div>
+    </section>
+
+    <section class="vision-objectives reveal" style="padding: 100px 10%; background: #111;">
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 60px;">
+            <div class="reveal-vision">
+                <h2 style="font-family: var(--font-heading); color: var(--accent-color); font-size: 2.5rem; margin-bottom: 25px;">NOS PERSPECTIVES</h2>
+                <p style="font-size: 1.1rem; line-height: 1.8; border-left: 2px solid var(--accent-color); padding-left: 20px;">
+                    Le bâtiment n'est pas une fin en soi, c'est le point de départ du développement. Notre perspective est claire : 
+                    <strong>devenir le catalyseur de la modernisation urbaine en Afrique de l'Ouest.</strong>
+                </p>
+            </div>
+            <div class="reveal-vision reveal">
+                <h2 style="font-family: var(--font-heading); color: var(--accent-color); font-size: 2.5rem; margin-bottom: 25px;">NOS OBJECTIFS</h2>
+                <ul style="list-style: none;">
+                    <li style="margin-bottom: 15px;"><span style="color: var(--accent-color); font-weight: bold; margin-right: 15px;">01.</span> Révolutionner la Rapidité (Gain de 40%)</li>
+                    <li style="margin-bottom: 15px;"><span style="color: var(--accent-color); font-weight: bold; margin-right: 15px;">02.</span> Empreinte Durable d'ici 2028</li>
+                    <li style="margin-bottom: 15px;"><span style="color: var(--accent-color); font-weight: bold; margin-right: 15px;">03.</span> Propulser le génie local ivoirien</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section class="manifesto-luxury bg-royal-blue">
+        <div class="container">
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center;">
+                <div>
+                    <h2 style="font-family: var(--font-heading); color: #FFD700; font-size: 2.5rem; margin-bottom: 20px;">L'EXCELLENCE EN CHIFFRES</h2>
+                    <!-- Utilisation des nouvelles classes fixes -->
+                    <div class="stats-fixed-grid">
+                        <div class="stat-fixed-item">
+                            <div class="stat-fixed-number">211+</div>
+                            <p class="stat-fixed-label">Projets réalisés</p>
+                        </div>
+                        <div class="stat-fixed-item">
+                            <div class="stat-fixed-number">5</div>
+                            <p class="stat-fixed-label">Pays d'intervention</p>
+                        </div>
+                        <div class="stat-fixed-item">
+                            <div class="stat-fixed-number">16</div>
+                            <p class="stat-fixed-label">Experts à votre service</p>
+                        </div>
+                        <div class="stat-fixed-item">
+                            <div class="stat-fixed-number">517+</div>
+                            <p class="stat-fixed-label">Bungalows livrés</p>
+                        </div>
+                    </div>
+                    <p style="margin-top: 30px; color: #ffffff; font-size: 1.1rem; line-height: 1.6; opacity: 0.9;">Des chiffres qui parlent d'eux-mêmes : chaque projet est une promesse tenue, chaque mètre carré une preuve de notre engagement.</p>
+                </div>
+                <div class="luxury-image-col" style="display: flex; justify-content: center;">
+                    <img src="../banniere/pro.jpeg" alt="Chantier Bat & Prefab" style="width: 100%; max-width: 500px; height: auto; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.3);">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="manifesto-luxury bg-dark-section">
+        <div class="container">
+            <h2 style="font-family: var(--font-heading); color: #FFD700; text-align: center; font-size: 2.5rem; margin-bottom: 50px;">CE QU'ILS DISENT DE NOUS</h2>
+            <div class="testimonials-grid">
+                <div class="testimonial-item">
+                    <p>"BAT & PREFAB a su transformer notre vision en réalité. Leur réactivité et leur professionnalisme ont fait la différence sur notre projet de construction modulaire."</p>
+                    <cite>— Directeur d'entreprise, Abidjan</cite>
+                </div>
+                <div class="testimonial-item">
+                    <p>"La qualité des matériaux et la précision du montage nous ont impressionnés. Une équipe à l'écoute qui a su s'adapter à nos contraintes."</p>
+                    <cite>— Responsable logistique, Abidjan</cite>
+                </div>
+                <div class="testimonial-item">
+                    <p>"Un partenaire fiable pour nos infrastructures industrielles. Nous avons gagné en rapidité d'exécution sans sacrifier la solidité."</p>
+                    <cite>— Ingénieur projet, Bouaké</cite>
+                </div>
+                <div class="testimonial-item">
+                    <p>"Leur bureau d'études a su concevoir des plans parfaitement adaptés à notre environnement. Une vraie plus-value technique."</p>
+                    <cite>— Architecte, Lomé</cite>
+                </div>
+                <div class="testimonial-item">
+                    <p>"Délais respectés, qualité au rendez-vous. BAT & PREFAB est un partenaire de confiance pour nos projets d'envergure."</p>
+                    <cite>— Directeur de projet, Ouagadougou</cite>
+                </div>
+                <div class="testimonial-item">
+                    <p>"Nous avons été accompagnés de A à Z avec une écoute et des conseils précieux. Je recommande vivement."</p>
+                    <cite>— Promoteur immobilier, Abidjan</cite>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer id="nos-contact" class="footer-section reveal">
+        <div class="container">
+            <div class="footer-grid reveal-delay-1">
+                <div class="footer-col col-left">
+                    <h2 class="footer-title">DÉMARRONS<br>VOTRE PROJET</h2>
+                    <p class="footer-tagline">L'expertise de l'acier et du béton.</p>
+                    <div class="social-wrapper">
+                        <h4 class="social-label">SUIVEZ-NOUS</h4>
+                        <div class="social-icons">
+                            <a href="https://www.linkedin.com/company/bat-prefab" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="https://www.facebook.com/bat-prefab.ci" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                            <a href="https://www.goafricaonline.com/ci/581881-bat-prefab-construction-abidjan-cote-ivoire" target="_blank"><i class="fas fa-globe-africa"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="footer-col col-center">
+                    <h4 class="social-label">SIÈGE / CÔTE D'IVOIRE</h4>
+                    <div class="footer-contact-item" style="margin-bottom: 15px;">
+                        <i class="fas fa-envelope highlight"></i>
+                        <a href="mailto:contact@bat-prefab.com">contact@bat-prefab.com</a>
+                    </div>
+                    <div class="footer-contact-item">
+                        <i class="fas fa-mobile-alt highlight"></i>
+                        <a href="tel:+2250556121339">+225 05 56 12 13 39</a>
+                        <a href="https://wa.me/2250556121339" style="margin-left: 10px;" title="Discuter sur WhatsApp">
+                            <i class="fab fa-whatsapp" style="color: #25D366;"></i>
+                        </a>
+                    </div>
+                    <div class="footer-contact-item">
+                        <i class="fas fa-mobile-alt highlight"></i>
+                        <a href="tel:+2250789855251">+225 07 89 85 52 51</a>
+                    </div>
+                    <div class="footer-contact-item">
+                        <i class="fas fa-phone-alt highlight"></i>
+                        <a href="tel:+2252721399717">+225 27 21 39 97 17</a>
+                    </div>
+                    <div class="support-footer-btn" style="margin-top: 20px;">
+        <button onclick="openGlobalChatWithNumero()" style="background: #0066CC; color: white; border: none; padding: 10px 20px; border-radius: 30px; cursor: pointer; font-weight: 600;">
+            <i class="fas fa-headset"></i> Support SAV
+        </button>
+    </div>
+                </div>
+                <div class="footer-col col-right">
+                    <h4 class="social-label">INTERNATIONAL</h4>
+                    <div style="margin-bottom: 5px; font-weight: bold; color: var(--accent-color); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px;">Burkina Faso</div>
+                    <div class="footer-contact-item" style="margin-bottom: 15px; justify-content: flex-end;">
+                        <i class="fas fa-mobile-alt highlight"></i>
+                        <a href="tel:+22675240800">+226 75 24 08 00</a>
+                    </div>
+                    <div style="margin-bottom: 5px; font-weight: bold; color: var(--accent-color); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px;">Togo</div>
+                    <div class="footer-contact-item" style="margin-bottom: 15px; justify-content: flex-end;">
+                        <i class="fas fa-mobile-alt highlight"></i>
+                        <a href="tel:+22897106363">+228 97 10 63 63</a>
+                    </div>
+                    <div style="margin-bottom: 5px; font-weight: bold; color: var(--accent-color); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px;">Cameroun</div>
+                    <div class="footer-contact-item" style="justify-content: flex-end;">
+                        <i class="fas fa-mobile-alt highlight"></i>
+                        <a href="tel:+237677554561">+237 6 77 55 45 61</a>
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="footer-newsletter" style="border-top: 1px solid var(--line-color); padding: 40px 0; margin-top: 40px; text-align: center;">
+                <h4 style="font-family: var(--font-heading); color: var(--accent-color); margin-bottom: 15px;">RESTEZ INFORMÉ</h4>
+                <p style="margin-bottom: 20px; opacity: 0.8; font-size: 0.9rem;">Recevez nos dernières réalisations et offres exclusives.</p>
+                <form id="newsletter-form" style="display: flex; justify-content: center; gap: 10px; max-width: 500px; margin: 0 auto; flex-wrap: wrap;">
+                    <input type="email" id="news-email" placeholder="VOTRE EMAIL" required 
+                           style="flex: 1; padding: 12px; background: #111; border: 1px solid #333; color: white; min-width: 250px;">
+                    <button type="submit" class="btn-plans-trigger" style="border:none; padding: 12px 25px;">S'ABONNER</button>
+                </form>
+                <p id="news-feedback" style="color: var(--accent-color); margin-top: 10px; font-size: 0.8rem; display: none;"></p>
+            </div>
+            <div class="footer-bottom">
+                <div class="footer-about-cta" style="margin-bottom: 40px; border-bottom: 1px solid var(--line-color); padding-bottom: 30px;">
+                    <h4 style="font-family: var(--font-heading); color: var(--accent-color); margin-bottom: 10px;">VOUS VOULEZ EN SAVOIR PLUS ?</h4>
+                    <p style="margin-bottom: 20px; opacity: 0.8;">Découvrez notre histoire, nos valeurs et notre manifeste pour l'architecture ivoirienne.</p>
+                    <a href="/a-propos/" class="btn-plans-trigger" style="text-decoration: none; display: inline-block; padding: 12px 30px;">
+                        En savoir plus sur Nous <i class="fas fa-arrow-right" style="margin-left: 10px;"></i>
+                    </a>
+                </div>
+                <div class="copyright">
+                    © <span id="current-year">2026</span> BAT & PREFAB.
+                    <span style="margin-left: 10px;">Tous droits réservés.</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <button class="floating-suivi" onclick="window.location.href='/suivi/'">
+        <i class="fas fa-truck"></i> Suivre ma commande
+    </button>
+
+    <div id="promo-overlay" class="promo-overlay">
+        <div class="promo-modal">
+            <span class="promo-close" onclick="closePromo()">&times;</span>
+            <div id="promo-body"></div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="../script.js"></script>
+    <script>
+        gsap.registerPlugin(ScrollTrigger);
+        
+        gsap.set(".reveal-hero, .reveal-card", { opacity: 0, y: 30 });
+        gsap.to(".reveal-hero", { opacity: 1, y: 0, duration: 1, stagger: 0.2, ease: "power2.out" });
+        gsap.to(".reveal-card", { scrollTrigger: { trigger: ".manifesto-grid", start: "top 85%" }, opacity: 1, y: 0, duration: 1, stagger: 0.2 });
+        gsap.from(".reveal-vision", { scrollTrigger: { trigger: ".vision-objectives", start: "top 80%" }, opacity: 0, x: -50, duration: 1, stagger: 0.3 });
+
+        gsap.from(".stat-fixed-item", {
+            scrollTrigger: { trigger: ".stats-fixed-grid", start: "top 85%" },
+            opacity: 0,
+            scale: 0.8,
+            duration: 0.8,
+            stagger: 0.15,
+            ease: "back.out(1.7)"
+        });
+        gsap.from(".stat-fixed-label", {
+            scrollTrigger: { trigger: ".stats-fixed-grid", start: "top 85%" },
+            opacity: 0,
+            y: 20,
+            duration: 0.6,
+            stagger: 0.15,
+            ease: "power2.out",
+            delay: 0.3
+        });
+
+        gsap.from(".testimonial-item", {
+            scrollTrigger: { trigger: ".testimonials-grid", start: "top 80%" },
+            opacity: 0,
+            y: 40,
+            duration: 0.8,
+            stagger: 0.25,
+            ease: "power2.out"
+        });
+
+        document.addEventListener('contextmenu', e => e.preventDefault());
+        document.addEventListener('keydown', e => {
+            if (e.key === "F12" || 
+                (e.ctrlKey && e.shiftKey && (e.key === "I" || e.key === "J")) || 
+                (e.ctrlKey && (e.key === "u" || e.key === "s"))) {
+                e.preventDefault();
+            }
+        });
+    </script>
+</body>
+</html>

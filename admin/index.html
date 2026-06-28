@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - BAT & PREFAB</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        /* ---------- RESET & VARIABLES ---------- */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { background: #0a0a0a; font-family: 'Inter', sans-serif; color: #ededed; }
+        :root { --blue: #0066CC; --yellow: #FFD700; --dark-bg: #0f0f0f; --card-bg: #1a1a1a; --border: #2c2c2c; --text-light: #e0e0e0; --text-muted: #a0a0a0; }
+        .admin-wrapper { max-width: 1400px; margin: 0 auto; padding: 20px 25px 50px; }
+        .admin-header { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; margin-bottom: 40px; padding-bottom: 20px; border-bottom: 1px solid var(--border); }
+        .logo-area h1 { font-size: 1.8rem; font-weight: 700; background: linear-gradient(135deg, #fff, var(--yellow)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+        .logo-area p { font-size: 0.75rem; color: var(--text-muted); }
+        .logout-btn { background: rgba(220,53,69,0.9); color: white; border: none; padding: 10px 22px; border-radius: 40px; font-weight: 600; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; transition: 0.2s; }
+        .logout-btn:hover { background: #dc3545; transform: translateY(-2px); }
+        .dashboard-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(360px, 1fr)); gap: 30px; margin-bottom: 50px; }
+        .admin-card { background: var(--card-bg); border-radius: 24px; border: 1px solid var(--border); overflow: hidden; transition: 0.25s ease; box-shadow: 0 8px 20px rgba(0,0,0,0.3); }
+        .admin-card:hover { transform: translateY(-4px); border-color: var(--blue); }
+        .card-header { background: rgba(0,102,204,0.1); padding: 18px 24px; border-bottom: 1px solid var(--border); }
+        .card-header h2 { font-size: 1.4rem; font-weight: 600; color: white; }
+        .card-body { padding: 24px; }
+        label { display: block; margin-bottom: 8px; font-weight: 500; color: var(--text-light); font-size: 0.85rem; }
+        input, textarea, select { width: 100%; padding: 12px 16px; background: #0f0f0f; border: 1px solid var(--border); border-radius: 12px; color: white; font-family: 'Inter', sans-serif; font-size: 0.9rem; margin-bottom: 20px; }
+        input:focus, textarea:focus, select:focus { outline: none; border-color: var(--blue); box-shadow: 0 0 0 3px rgba(0,102,204,0.2); }
+        button { font-family: 'Inter', sans-serif; cursor: pointer; }
+        .btn-primary { background: var(--blue); color: white; border: none; padding: 12px 28px; border-radius: 40px; font-weight: 600; display: inline-flex; align-items: center; gap: 8px; transition: 0.2s; }
+        .btn-primary:hover { background: #0052a3; transform: translateY(-1px); }
+        .btn-secondary { background: #2c2c2c; color: #eee; border: none; padding: 10px 20px; border-radius: 40px; font-weight: 500; display: inline-flex; align-items: center; gap: 8px; }
+        .btn-secondary:hover { background: #3a3a3a; }
+        .btn-warning { background: #dc3545; color: white; border: none; padding: 10px 20px; border-radius: 40px; display: inline-flex; align-items: center; gap: 8px; }
+        .message-item { background: #111; border-left: 4px solid var(--blue); padding: 15px; margin-bottom: 12px; border-radius: 12px; }
+        .tab-buttons { display: flex; gap: 20px; margin-bottom: 25px; border-bottom: 1px solid var(--border); }
+        .tab-btn { background: none; border: none; padding: 10px 0; font-weight: 600; font-size: 1rem; color: var(--text-muted); cursor: pointer; }
+        .tab-btn.active { color: var(--yellow); border-bottom: 2px solid var(--yellow); }
+        .chat-container { display: flex; flex-wrap: wrap; background: #111; border-radius: 20px; border: 1px solid var(--border); overflow: hidden; min-height: 500px; }
+        .chat-sidebar { width: 260px; border-right: 1px solid var(--border); background: #0d0d0d; }
+        .chat-main { flex: 1; display: flex; flex-direction: column; }
+        .chat-session { padding: 15px; border-bottom: 1px solid #222; cursor: pointer; }
+        .chat-session:hover, .chat-session.active { background: #1a1a1a; border-left: 3px solid var(--yellow); }
+        .messages-area { height: 380px; overflow-y: auto; padding: 20px; display: flex; flex-direction: column; gap: 12px; }
+        .message-bubble.client { background: #2c2c2c; align-self: flex-start; border-radius: 20px; border-bottom-left-radius: 5px; }
+        .message-bubble.admin { background: var(--blue); align-self: flex-end; border-radius: 20px; border-bottom-right-radius: 5px; }
+        .reply-area { padding: 15px; border-top: 1px solid var(--border); display: flex; gap: 10px; }
+        #admin-reply-input { margin-bottom: 0; flex: 1; }
+        .status-text { font-size: 0.75rem; color: var(--text-muted); margin-top: 10px; }
+        .card-modify .card-body { padding: 16px 24px; }
+        .card-newsletter .card-body { padding: 16px 24px; }
+        .card-newsletter #subscribers-list { max-height: 260px; overflow-y: auto; padding-right: 6px; }
+        #subscribers-list > div { padding: 8px 12px; border-bottom: 1px solid #2a2a2a; }
+        .search-wrapper { position: relative; flex: 1; }
+        .search-icon { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); pointer-events: none; color: #aaa; }
+        .search-wrapper input { padding-left: 38px; margin-bottom: 0; }
+        #sav-file-name { display: inline-block; max-width: 200px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; vertical-align: middle; color: var(--yellow); }
+        .users-table { width: 100%; border-collapse: collapse; }
+        .users-table th, .users-table td { padding: 12px; border-bottom: 1px solid #333; text-align: left; }
+        @media (max-width: 780px) { .admin-wrapper { padding: 15px; } .dashboard-grid { grid-template-columns: 1fr; } .chat-sidebar { width: 100%; border-right: none; border-bottom: 1px solid var(--border); } .chat-container { flex-direction: column; } }
+.realisations-list-card {
+    display: flex;
+    flex-direction: column;
+    height: 450px; 
+}
+
+.realisations-list-card .card-body {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    padding-bottom: 0; /* supprime l'espace en bas */
+}
+
+#admin-realisations-list {
+    flex: 1;
+    overflow-y: auto;
+    padding-right: 6px; /* pour éviter que la scrollbar cache le contenu */
+    /* Supprimez toute max-height existante */
+    max-height: none !important;
+}
+    </style>
+</head>
+<body>
+
+<!-- Définitions des icônes SVG -->
+<svg style="display: none;" xmlns="http://www.w3.org/2000/svg">
+    <symbol id="icon-search" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="10" cy="10" r="7"/><line x1="21" y1="21" x2="15" y2="15"/></symbol>
+    <symbol id="icon-plus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></symbol>
+    <symbol id="icon-logout" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></symbol>
+    <symbol id="icon-paperclip" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h6l-2 8 10-12h-6l2-8z"/></symbol>
+    <symbol id="icon-upload" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12m0 0-3-3m3 3 3-3M5 21h14"/></symbol>
+    <symbol id="icon-trash" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><line x1="10" y1="11" x2="10" y2="17"/><line x1="14" y1="11" x2="14" y2="17"/></symbol>
+    <symbol id="icon-edit" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 3l4 4L7 21H3v-4L17 3z"/></symbol>
+    <symbol id="icon-chat" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></symbol>
+    <symbol id="icon-user-plus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><line x1="20" y1="8" x2="20" y2="14"/><line x1="17" y1="11" x2="23" y2="11"/></symbol>
+</svg>
+
+<div class="admin-wrapper" id="admin-wrapper" style="display: none;">
+    <div class="admin-header">
+        <div class="logo-area">
+            <h1>BAT & PREFAB · ADMIN</h1>
+            <p>Bienvenue <span id="current-user-name"></span> (<span id="current-user-role"></span>)</p>
+        </div>
+        <button onclick="logout()" class="logout-btn">
+            <svg width="16" height="16"><use href="#icon-logout"/></svg> DECONNEXION
+        </button>
+    </div>
+
+    <!-- Grille dynamique pour les cartes -->
+    <div class="dashboard-grid" id="dashboard-grid"></div>
+
+    <!-- Carte Gestion des utilisateurs (visible uniquement pour super admin) -->
+    <div id="users-management-card" class="admin-card" style="margin-bottom: 40px; display: none;">
+        <div class="card-header">
+            <h2>Gestion des utilisateurs</h2>
+        </div>
+        <div class="card-body">
+            <button onclick="showCreateUserForm()" class="btn-primary" style="margin-bottom: 20px;">
+                <svg width="14" height="14"><use href="#icon-user-plus"/></svg> Créer un utilisateur
+            </button>
+            <div id="users-list-container"><p>Chargement...</p></div>
+        </div>
+    </div>
+
+    <!-- Modales (inchangées, conservées) -->
+    <div id="editModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 10000; justify-content: center; align-items: center; backdrop-filter: blur(5px);">
+        <div style="background: #1a1a1a; max-width: 750px; width: 90%; border-radius: 28px; border: 1px solid var(--border); max-height: 85vh; overflow-y: auto; padding: 25px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                <h3>Modifier la réalisation</h3>
+                <button onclick="closeEditModal()" style="background: none; border: none; font-size: 1.8rem; color: white; cursor: pointer;">&times;</button>
+            </div>
+            <input type="hidden" id="edit-id">
+            <label>Titre du projet</label><input type="text" id="edit-title">
+            <label>Description technique</label><textarea id="edit-description" rows="3"></textarea>
+            <label>Date de réalisation</label><input type="date" id="edit-date">
+            <label>Galerie d'images existantes</label><div id="existing-images-container"></div>
+            <label>Ajouter de nouvelles images</label><input type="file" id="edit-new-images" accept="image/*" multiple>
+            <label>Remplacer la vidéo (optionnel)</label><input type="file" id="edit-new-video" accept="video/*">
+            <div style="display: flex; gap: 15px; justify-content: flex-end; margin-top: 25px;">
+                <button onclick="closeEditModal()" class="btn-secondary">Annuler</button>
+                <button onclick="updateRealisation()" class="btn-primary">Enregistrer</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="projetModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 10001; justify-content: center; align-items: center; backdrop-filter: blur(5px);">
+        <div style="background: #1a1a1a; max-width: 600px; width: 90%; border-radius: 24px; padding: 25px;">
+            <div style="display: flex; justify-content: space-between;"><h3 id="projetModalTitle">Créer un projet</h3><button onclick="closeProjetModal()" style="background: none; border: none; font-size: 1.8rem; color: white;">&times;</button></div>
+            <input type="hidden" id="edit-projet-id">
+            <label>Nom du client *</label><input type="text" id="projet-nom-client">
+            <label>Description</label><textarea id="projet-description" rows="3"></textarea>
+            <label>Date de début prévue</label><input type="date" id="projet-date-debut">
+            <label>Date de fin prévue</label><input type="date" id="projet-date-fin">
+            <label>Statut global</label><select id="projet-statut"><option value="en_attente">En attente</option><option value="en_cours">En cours</option><option value="termine">Terminé</option></select>
+            <label>Facture (PDF)</label><input type="file" id="projet-facture" accept="application/pdf">
+            <div id="facture-status" class="status-text"></div>
+            <div style="display: flex; justify-content: flex-end; gap: 15px; margin-top: 20px;"><button onclick="closeProjetModal()" class="btn-secondary">Annuler</button><button onclick="saveProjet()" class="btn-primary">Enregistrer</button></div>
+            <div id="projet-numero" class="status-text"></div>
+        </div>
+    </div>
+
+    <div id="etapesModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 10002; justify-content: center; align-items: center; backdrop-filter: blur(5px);">
+        <div style="background: #1a1a1a; max-width: 800px; width: 90%; border-radius: 24px; padding: 25px; max-height: 85vh; overflow-y: auto;">
+            <div style="display: flex; justify-content: space-between;"><h3 id="etapesModalTitle">Étapes du projet</h3><button onclick="closeEtapesModal()" style="background: none; border: none; font-size: 1.8rem; color: white;">&times;</button></div>
+            <div id="etapes-list" style="margin: 20px 0;"></div>
+            <hr style="border-color: #333;"><h4>Ajouter une étape</h4>
+            <label>Titre *</label><input type="text" id="new-etape-titre" list="etapes-predifinies" placeholder="Sélectionner ou saisir une étape">
+            <datalist id="etapes-predifinies">
+                <option>Réalisations des plots</option><option>Décoffrage des plots</option><option>Montage de structure métallique</option><option>Montage de panneaux sandwichs</option>
+                <option>Confection, pose de portes et fenêtres</option><option>Confection, pose de grilles de protection (antivols)</option><option>Pose de rideaux (store d'intérieur)</option>
+                <option>Pose de toitures</option><option>Pose de cheneaux</option><option>Câblage électrique et pose d'appareillage</option><option>Câblage informatique et appareillage</option>
+                <option>Fourniture et pose de sanitaires</option><option>Installation de climatisation (unité intérieur et extérieur)</option><option>Réalisation de chape et carrelage</option>
+                <option>Peinture extérieur (structure métallique uniquement)</option><option>Peinture panneaux bardage</option><option>Réalisation de chape</option><option>Pose de carrelage et joints</option>
+                <option>Réalisation de chape et Pose carrelage</option><option>Réalisation de fouilles</option><option>Coulage béton de propreté</option><option>Élévation de murs</option>
+            </datalist>
+            <label>Description</label><textarea id="new-etape-desc" rows="2"></textarea>
+            <label>Statut</label><select id="new-etape-statut"><option value="a_faire">À faire</option><option value="en_cours">En cours</option><option value="termine">Terminé</option></select>
+            <label>Coordonnées (latitude, longitude) - optionnel</label><div style="display: flex; gap: 10px;"><input type="text" id="new-etape-lat" placeholder="Latitude" style="width:50%;"><input type="text" id="new-etape-lon" placeholder="Longitude" style="width:50%;"></div>
+            <label>Date début</label><input type="date" id="new-etape-date-debut"><label>Date fin</label><input type="date" id="new-etape-date-fin">
+            <label>Image principale (optionnel)</label><input type="file" id="new-etape-image" accept="image/*">
+            <label>Vidéo (optionnel)</label><input type="file" id="new-etape-video" accept="video/*">
+            <div style="display: flex; justify-content: flex-end; margin-top: 15px;"><button onclick="addEtape()" class="btn-primary">Ajouter l'étape</button></div>
+            <div id="etapes-message" class="status-text"></div>
+        </div>
+    </div>
+</div>
+
+<!-- Overlay de connexion (email/username + mot de passe) -->
+<div id="auth-overlay" style="position:fixed; inset:0; background:#000; z-index:9999; display:flex; flex-direction:column; justify-content:center; align-items:center;">
+    <h2 style="color:var(--yellow); margin-bottom:20px;">ACCES RESTREINT</h2>
+    <input type="text" id="login-identifier" placeholder="Email ou nom d'utilisateur" style="padding:12px; width:280px; background:#111; border:1px solid #333; color:white; border-radius:40px; text-align:center; margin-bottom:12px;">
+    <input type="password" id="login-password" placeholder="Mot de passe" style="padding:12px; width:280px; background:#111; border:1px solid #333; color:white; border-radius:40px; text-align:center;">
+    <button onclick="login()" style="margin-top:15px; background:var(--blue); border:none; padding:10px 30px; border-radius:40px; font-weight:bold; color:white;">SE CONNECTER</button>
+    <p id="auth-error" style="color:#dc3545; margin-top:15px; display:none;">Identifiants incorrects</p>
+</div>
+
+<script src="admin-script.js"></script>
+<script>
+    // Gestion des onglets Newsletter (sera appelée après injection)
+    function showTab(tab) {
+        const listDiv = document.getElementById('view-list');
+        const sendDiv = document.getElementById('view-send');
+        const listBtn = document.getElementById('tab-list-btn');
+        const sendBtn = document.getElementById('tab-send-btn');
+        if (!listDiv || !sendDiv) return;
+        if (tab === 'list') {
+            listDiv.style.display = 'block';
+            sendDiv.style.display = 'none';
+            if (listBtn) listBtn.classList.add('active');
+            if (sendBtn) sendBtn.classList.remove('active');
+        } else {
+            listDiv.style.display = 'none';
+            sendDiv.style.display = 'block';
+            if (sendBtn) sendBtn.classList.add('active');
+            if (listBtn) listBtn.classList.remove('active');
+        }
+    }
+    setTimeout(() => {
+        if (document.getElementById('view-list')) showTab('list');
+    }, 500);
+</script>
+
+</body>
+</html>
