@@ -1510,6 +1510,15 @@ window.selectCategory = function(key, element) {
     const targetDetails = document.getElementById(`details-${key}`);
     const isAlreadyOpen = element.classList.contains('active');
 
+    // ---- TRACKING : ouverture de la catégorie ----
+    if (!isAlreadyOpen && typeof window.trackEvent === 'function') {
+        const catData = servicesData[key];
+        window.trackEvent('Category_Open', {
+            category_key: key,
+            category_title: catData ? catData.title : 'Inconnu'
+        });
+    }
+
     document.querySelectorAll('.h-category-card').forEach(item => {
         if(item !== element) {
             item.classList.remove('active');
@@ -1523,16 +1532,13 @@ window.selectCategory = function(key, element) {
     });
 
     if (!isAlreadyOpen) {
-   
         element.classList.add('active');
-        
         if (targetDetails.innerHTML.trim() === "") {
             const data = servicesData[key];
             if (data && data.subCategories) {
-                targetDetails.innerHTML = `<div class="inner-grid-container">${window.generateSubCategoriesHTML(data.subCategories)}</div>`;
+                targetDetails.innerHTML = `<div class="inner-grid-container">${window.generateSubCategoriesHTML(data.subCategories, key)}</div>`;
             }
         }
-        
         gsap.to(targetDetails, { 
             height: "auto", 
             duration: 0.5, 
@@ -1545,11 +1551,9 @@ window.selectCategory = function(key, element) {
                 if(window.ScrollTrigger) ScrollTrigger.refresh();
             }
         });
-
         setTimeout(() => {
             element.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
         }, 300);
-
     } else {
         element.classList.remove('active');
         targetDetails.style.overflow = "hidden";
@@ -1557,14 +1561,14 @@ window.selectCategory = function(key, element) {
     }
 };
 
-window.generateSubCategoriesHTML = function(subs) {
+
+window.generateSubCategoriesHTML = function(subs, categoryKey) {
     if (!subs || subs.length === 0) return '<p style="padding:20px; color:#aaa; text-align:center;">Aucun détail disponible pour le moment.</p>';
 
     return subs.map(s => {
         const safeTitle = s.title.replace(/'/g, "&#39;").replace(/"/g, "&quot;");
         const safeDesc = s.desc.replace(/'/g, "&#39;").replace(/"/g, "&quot;").replace(/\r?\n/g, "<br>");
         const imgsJson = JSON.stringify(s.imgs || []).replace(/'/g, "&#39;"); 
-
         const imgUrl = (s.imgs && s.imgs.length > 0) ? s.imgs[0] : 'https://via.placeholder.com/300x200?text=Pas+d+image';
 
         return `
@@ -1574,7 +1578,7 @@ window.generateSubCategoriesHTML = function(subs) {
             </div>
             <h3>${s.title}</h3>
             <p class="card-preview-desc">${s.desc}</p>
-            <button class="btn-pillar-more" onclick='window.openServiceLightbox("${safeTitle}", "${safeDesc}", ${imgsJson})'>
+            <button class="btn-pillar-more" onclick='window.openServiceLightbox("${safeTitle}", "${safeDesc}", ${imgsJson}, "${categoryKey}")'>
                 EN SAVOIR PLUS
             </button>
         </div>
@@ -1587,13 +1591,22 @@ window.generateSubCategoriesHTML = function(subs) {
 
 
 
-window.openServiceLightbox = function(title, description, images, index = 0) {
+window.openServiceLightbox = function(title, description, images, categoryKey, index = 0) {
     const lightbox = document.getElementById('service-lightbox');
     const content = document.querySelector('.svc-lb-content');
     const imgElement = document.getElementById('svc-lb-img');
     const textDiv = document.getElementById('svc-lb-text-custom');
 
     if (!lightbox || !content) return;
+
+    // ---- TRACKING ----
+    const categoryTitle = (categoryKey && servicesData[categoryKey]) ? servicesData[categoryKey].title : 'Inconnue';
+    if (typeof window.trackEvent === 'function') {
+        window.trackEvent('Service_Detail', {
+            category: categoryTitle,
+            service_name: title,
+        });
+    }
 
     window.currentImages = images || [];
     window.currentIndex = index;
@@ -1611,6 +1624,7 @@ window.openServiceLightbox = function(title, description, images, index = 0) {
         { scale: 1, opacity: 1, y: 0, duration: 0.6, ease: "back.out(1.7)" }
     );
 };
+
 window.closeServiceLightbox = function() {
     const lightbox = document.getElementById('service-lightbox');
     const content = document.querySelector('.svc-lb-content');
