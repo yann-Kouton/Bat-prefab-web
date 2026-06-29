@@ -3170,7 +3170,7 @@ html, body, body * {
     margin-top: auto !important;  
 }
 
-@media (hover: none) and (min-width: 769px) {
+@media (pointer: coarse) and (min-width: 769px) {
     .promo-modal {
         width: 85vw !important; 
         max-width: 560px !important;
