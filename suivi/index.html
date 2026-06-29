@@ -536,7 +536,6 @@
     cursor: pointer;
 }
 
-/* Ticker bar (identique à la page À propos) */
 .ticker-bar {
     display: flex !important;
     background: linear-gradient(90deg, #D4AF37, #FFD700, #D4AF37);
@@ -875,11 +874,9 @@
     <script src="../script.js"></script>
 
     <script>
-        // ---------- CONFIGURATION ----------
         const supabaseGest = supabase.createClient('https://kqlzvczfxzlkcxziapin.supabase.co', 'sb_publishable_B7b1OPGP0L-KZR7Q-7_Iog_c2X6KbIm');
 
-        // Variables du chat
-        let currentProjet = null;     // { id, nom_client, numero_unique }
+        let currentProjet = null;     
         let currentSessionId = localStorage.getItem('sav_session_id');
         let pendingFile = null;
 
@@ -888,7 +885,6 @@
             localStorage.setItem('sav_session_id', currentSessionId);
         }
 
-        // ---------- FONCTIONS CHAT ----------
        
         async function loadChatHistory() {
     if (!currentProjet) return;
@@ -907,7 +903,6 @@
     const messagesDiv = document.getElementById('chat-messages');
     messagesDiv.innerHTML = '';
     
-    // Si aucun message, insérer un message de bienvenue
     if (!data || data.length === 0) {
         const welcomeMsg = "Bienvenue ! Décrivez votre situation avec images/vidéos si possible. Un conseiller vous répondra dans les meilleurs délais.";
         const { error: insertError } = await supabaseGest.from('chat_sav').insert([{
@@ -924,12 +919,10 @@
             messagesDiv.innerHTML = '<div class="message system">Bienvenue ! Un conseiller vous répondra dans les meilleurs délais.</div>';
             return;
         }
-        // Recharger après insertion
-        loadChatHistory(); // appel récursif mais cette fois il y aura des données
+        loadChatHistory(); 
         return;
     }
     
-    // Afficher tous les messages
     data.forEach(msg => {
         if (msg.message && msg.message.startsWith('CLIENT_NAME:')) return;
         addMessageToChat(msg.message, msg.sender, msg.file_url, msg.file_type);
@@ -1012,7 +1005,6 @@ function openChatSav() {
             }
         }
 
-        // Gestion fichier
         document.getElementById('chat-file-input').addEventListener('change', (e) => {
             const file = e.target.files[0];
             if (!file) return;
@@ -1048,7 +1040,6 @@ function openChatSav() {
             openChatSav();
         }
 
-        // Écouter les nouveaux messages (admin)
         supabaseGest.channel('sav-chat')
             .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'chat_sav' }, (payload) => {
                 const newMsg = payload.new;
@@ -1059,7 +1050,6 @@ function openChatSav() {
             })
             .subscribe();
 
-        // ---------- RECHERCHE PROJET ----------
         async function rechercherProjet() {
             const numero = document.getElementById('tracking-number').value.trim();
             const resultDiv = document.getElementById('resultat');
@@ -1141,7 +1131,6 @@ function openChatSav() {
             }
         }
 
-        // Fonctions utilitaires (inchangées)
         function apercuFacture(url) {
             let modal = document.getElementById('pdfModal');
             if (!modal) {
@@ -1207,12 +1196,8 @@ function openChatSav() {
             const overlay = document.getElementById('promo-overlay');
             if (overlay) overlay.style.display = 'flex';
         };
-        window.closePromo = function() {
-            const overlay = document.getElementById('promo-overlay');
-            if (overlay) overlay.style.display = 'none';
-        };
+       
 
-        // Rendre le chat déplaçable
         function makeDraggable() {
             const modal = document.getElementById('chatSavModal');
             const header = document.getElementById('chat-header');
